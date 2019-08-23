@@ -38,8 +38,19 @@ JCR move of current input to target path (can be a node or a property)
 - `sling:resourceType` is `slingPipes/mv`
 - `expr` full target path, note that parent path must exists
 
-        .echo("/content/foo/old/location")
-        .mv("/content/bar/new/location")
+        .echo("/content/foo/old/oldlocation")
+        .mv("/content/bar/new/newlocation")
+
+following will move resource at `/content/foo/old/oldlocation` to under `/content/bar/new` before `newlocation`
+
+        .echo("/content/foo/old/oldlocation")
+        .mv("/content/bar/new/newlocation").with('orderBeforeTarget', true)
+
+following will move resource at `/content/foo/old/oldlocation` to `/content/bar/new/newlocation` and overwrite `newlocation`
+
+        .echo("/content/foo/old/oldlocation")
+        .mv("/content/bar/new/newlocation").with('overwriteTarget', true)
+
 
 ##### RemovePipe (`rm()`)
 removes the input resource, returns the parent, regardless of the resource being a node, or
